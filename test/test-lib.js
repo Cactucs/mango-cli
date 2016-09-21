@@ -1,5 +1,6 @@
 var should = require('should')
 var del = require('del')
+var assert = require('yeoman-assert')
 
 var TEMP = 'test/temp'
 var EXAMPLE = 'example/frontbase'
@@ -63,6 +64,43 @@ describe('Mango class', function() {
 		it('run the production build task', function(done) {
 			this.timeout(15000)
 			mango.build([], done)
+		})
+
+		it('build scripts files', function() {
+			assert.file([
+				EXAMPLE_DIST + '/js/index.js',
+				EXAMPLE_DIST + '/js/index-next.js'
+			])
+		})
+
+		it('build styles files', function() {
+			assert.file([
+				EXAMPLE_DIST + '/styles/screen.css',
+				EXAMPLE_DIST + '/styles/test.css'
+			])
+		})
+
+		it('build images files', function() {
+			assert.file([
+				EXAMPLE_DIST + '/img/rocket512.png',
+				EXAMPLE_DIST + '/img/stars.png',
+				EXAMPLE_DIST + '/img/twinkling.png',
+				EXAMPLE_DIST + '/img/bar/one.svg',
+				EXAMPLE_DIST + '/img/bar/two.svg',
+				EXAMPLE_DIST + '/img/bar/three.svg'
+			])
+		})
+
+		it('build sprites files', function() {
+			assert.file([
+				EXAMPLE_DIST + '/sprites/shapes-bar.svg'
+			])
+		})
+
+		it('build templates files', function() {
+			assert.file([
+				EXAMPLE_DIST + '/index.html'
+			])
 		})
 
 
